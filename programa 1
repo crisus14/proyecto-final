@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Variables de datos
+    char nombreEscuela[100], claveEscuela[10], tipoEscuela[20], telefono[10], correoInstitucion[50];
+    char horaVisita[6], salaVisitada[20], observaciones[200], Atendio[50];
+    char fechaVisita[11], responsable[50], gradoVisitantes[10];
+    char calle[50], colonia[30], delegacion[30], estado[30], codigoPostal[5];
+    int contadorVisitas = 0;
+
+    FILE *file;
+
+    // Escribir en el archivo
+    file = fopen("registro_visitas.txt", "a");  // Abre el archivo en modo append (agregar), para eso se usa la "a"
+
+    if (file == NULL) {
+        printf("Error al abrir el archivo\n");
+        return 1;
+    }
+
+    printf("Registro de Visitas al Museo\n");
+    printf("-----------------------------------\n");
+    printf("Por favor ingresa los datos de la visita.\n");
+
+    printf("INSTRUCCIONES:\n");
+    printf("1. Ingresa el nombre completo de la institucion.\n");
+    printf("2. La clave debe tener 5 caracteres alfanuméricos.\n");
+    printf("3. El tipo de escuela debe ser: SEP, Particular, Abierta o En Línea.\n");
+    printf("4. La hora debe estar en formato 24 horas (ej. 14:00).\n");
+    printf("5. Ingresa los datos de direccion completos.\n");
+    printf("-----------------------------------\n");
+
+    // Datos de la institucion
+    
+    printf("Nombre de la escuela: ");
+    fgets(nombreEscuela, sizeof(nombreEscuela), stdin);
+    printf("Clave de la escuela: ");
+    fgets(claveEscuela, sizeof(claveEscuela), stdin);
+    printf("Tipo de escuela (SEP, Particular, Abierta, En Línea): ");
+    fgets(tipoEscuela, sizeof(tipoEscuela), stdin);
+    printf("Teléfono de la institucion: ");
+    fgets(telefono, sizeof(telefono), stdin);
+    printf("Correo electronico de la institucion: ");
+    fgets(correoInstitucion, sizeof(correoInstitucion), stdin);
+
+    // Datos de la visita:
+    
+    printf("Hora de la visita (formato 24h, ej. 14:00): ");
+    fgets(horaVisita, sizeof(horaVisita), stdin);
+    printf("Sala o actividad visitada: ");
+    fgets(salaVisitada, sizeof(salaVisitada), stdin);
+    printf("Observaciones: ");
+    fgets(observaciones, sizeof(observaciones), stdin);
+
+    // Responsable:
+    
+    printf("Quién atendio: ");
+    fgets(Atendio, sizeof(Atendio), stdin);
+    printf("Fecha de la visita (DD/MM/AAAA): ");
+    fgets(fechaVisita, sizeof(fechaVisita), stdin);
+    printf("Responsable de la institucion: ");
+    fgets(responsable, sizeof(responsable), stdin);
+    printf("Grado de los visitantes: ");
+    fgets(gradoVisitantes, sizeof(gradoVisitantes), stdin);
+
+    // Direccion:
+                 
+    printf("Direccion:\n");
+    printf("Calle: ");
+    fgets(calle, sizeof(calle), stdin);
+    printf("Colonia: ");
+    fgets(colonia, sizeof(colonia), stdin);
+    printf("Delegacion/Municipio: ");
+    fgets(delegacion, sizeof(delegacion), stdin);
+    printf("Estado: ");
+    fgets(estado, sizeof(estado), stdin);
+    printf("Codigo Postal: ");
+    fgets(codigoPostal, sizeof(codigoPostal), stdin);
+
+    // Se mandan los datos al archivo
+    fprintf(file, "Institucion: %s", nombreEscuela);
+    fprintf(file, "Clave: %s", claveEscuela);
+    fprintf(file, "Tipo: %s", tipoEscuela);
+    fprintf(file, "Teléfono: %s", telefono);
+    fprintf(file, "Correo: %s", correoInstitucion);
+    fprintf(file, "Direccion: %s, %s, %s, %s, %s\n", calle, colonia, delegacion, estado, codigoPostal);
+    fprintf(file, "Sala/Actividad visitada: %s", salaVisitada);
+    fprintf(file, "Hora de visita: %s", horaVisita);
+    fprintf(file, "Fecha de visita: %s", fechaVisita);
+    fprintf(file, "Responsable: %s", responsable);
+    fprintf(file, "Atendido por: %s", Atendio);
+    fprintf(file, "Grado de visitantes: %s", gradoVisitantes);
+    fprintf(file, "Observaciones: %s", observaciones);
+    fprintf(file, "-----------------------------------\n");
+
+    // Actualizar el contador
+    contadorVisitas++;
+    fprintf(file, "Total de visitas registradas: %d\n", contadorVisitas);
+
+    fclose(file); 
+     // Se cierraa el archivo
+
+    return 0;
+}
